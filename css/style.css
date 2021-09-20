@@ -50,6 +50,7 @@ section {
     font-size: 3em;
     background: url(../images/search-small.jpg) no-repeat scroll 10px 30px;
     padding-left: 12%;
+    margin-top: 3%;
 }
 
 .search-button-container {
@@ -77,6 +78,38 @@ section {
 }
 
 .search-button-txt {
+    padding: 10% 5% 5% 5%;
+    font-weight: 800;
+    user-select: none;
+    font-size: 4em;
+    color: black;
+}
+
+.route-button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 20%;
+    margin-top: 10%;
+}
+
+.route-button {
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+    justify-content: center;
+    align-items: center;
+    margin: 0% 25% 5% 25%;
+}
+
+.route-button-icon {
+    height: 9em;
+    padding: 5% 5% 5% 5%;
+    user-select: none;
+}
+
+.route-button-txt {
     padding: 10% 5% 5% 5%;
     font-weight: 800;
     user-select: none;
@@ -119,6 +152,15 @@ input[type="text"] {
 .effect-1:focus ~ .focus-border {
     width: 70%;
     transition: 0.4s;
+}
+
+.title-txt {
+    margin: 13% 2% 10% 2%;
+    font-weight: 800;
+    user-select: none;
+    font-size: 8em;
+    color: black;
+    text-align: center;
 }
 
 .nav-bar {
