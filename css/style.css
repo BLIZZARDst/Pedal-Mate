@@ -163,3 +163,19 @@ input[type="text"] {
     font-size: 2em;
     color: rgb(218, 0, 99);
 }
+
+/* ??? */
+
+#map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1em;
+}
+
+#menu {
+    position: absolute;
+    background: #efefef;
+    padding: 10px;
+    font-family: 'Open Sans', sans-serif;
+}
