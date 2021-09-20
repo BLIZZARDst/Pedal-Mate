@@ -239,11 +239,20 @@ input[type="text"] {
 
 /* ??? */
 
+.map-container {
+    justify-content: center;
+    align-items: center;
+}
+
 #map {
+    /*
     position: absolute;
+        */
     top: 0;
-    bottom: 0;
-    width: 1em;
+    left: 9%;
+    
+    height: 800px;
+    width: 800px;
 }
 
 #menu {
@@ -251,4 +260,22 @@ input[type="text"] {
     background: #efefef;
     padding: 10px;
     font-family: 'Open Sans', sans-serif;
+}
+
+#info {
+    display: block;
+    position: relative;
+    margin: 0px auto;
+    width: 50%;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    font-size: 12px;
+    text-align: center;
+    color: #222;
+    background: #fff;
+}
+
+.mapboxgl-canvas {
+    height: 100px;
 }

@@ -12,7 +12,8 @@
 </head>
 
 <body>
-    <div id='map' style='width: 1350px; height: 800px;'></div>
+    <div id='map' style='width: 1350px; height: 500px;'></div>
+    <pre id="info"></pre>
 
     <div id="menu">
         <input id="satellite-v9" type="radio" name="rtoggle" value="satellite" checked="checked">
@@ -49,6 +50,15 @@
         }
 
         map.addControl(new mapboxgl.NavigationControl());
+
+        map.on('mousemove', function (e) {
+            document.getElementById('info').innerHTML =       /* innerHTML 属性设置或返回表格行的开始和结束标签之间的 HTML  */
+                // e.point is the x, y coordinates of the mousemove event relative
+                // to the top-left corner of the map
+                JSON.stringify(e.point) + '<br />' +
+                // e.lngLat is the longitude, latitude geographical position of the event
+                JSON.stringify(e.lngLat);  /* JSON.stringify() 方法可以将任意的 JavaScript 值序列化成 JSON 字符串 */
+        });
     </script>
 
 
