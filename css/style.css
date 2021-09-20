@@ -32,7 +32,7 @@ section {
 #search-panel {
     display: flex;
     flex-direction: column;
-    margin: 12% 10% 15% 10%;
+    margin: 12% 10% 25% 10%;
     height: 25%;
 }
 
