@@ -68,7 +68,7 @@
 
         // an arbitrary start will always be the same
         // only the end or destination will change
-        const start = [153, -27.5];
+        const start = [153.0147, -27.5];
 
         // this is where the code for the next step will go
 
@@ -169,6 +169,17 @@
                 });
             }
             // add turn instructions here at the end
+            // get the sidebar and add the instructions
+            const instructions = document.getElementById('instructions');
+            const steps = data.legs[0].steps;
+
+            let tripInstructions = '';
+            for (const step of steps) {
+                tripInstructions += `<li>${step.maneuver.instruction}</li>`;
+            }
+            instructions.innerHTML = `<p><strong>Trip duration: ${Math.floor(
+                data.duration / 60
+            )} min 🚴 </strong></p><ol>${tripInstructions}</ol>`;
         }
 
         map.on('load', () => {
@@ -250,17 +261,7 @@
             getRoute(coords);
         });
 
-        // get the sidebar and add the instructions
-        const instructions = document.getElementById('instructions');
-        const steps = data.legs[0].steps;
 
-        let tripInstructions = 'dada';
-        for (const step of steps) {
-            tripInstructions += `<li>${step.maneuver.instruction}</li>`;
-        }
-        instructions.innerHTML = `<p><strong>Trip duration: ${Math.floor(
-            data.duration / 60
-        )} min 🚴 </strong></p><ol>${tripInstructions}</ol>`;
     </script>
 
 
