@@ -250,7 +250,7 @@ input[type="text"]::placeholder {
     /*
     position: absolute;
         */
-    height: 70vh;
+    height: 40vh;
     width: 100%;
 }
 
@@ -336,3 +336,44 @@ margin-left: 25px;
 }
 
 
+/* Photo_sharing_template */
+
+.snap-container {
+    width: 50%;
+    margin: 0 auto;
+}
+.snap-container .post .post-image-container img{
+    width: 100%;
+}
+
+.post-details {
+    display:flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.post-details .left-post-buttons {
+    display: flex;
+    justify-content: space-evenly; 
+    flex: 1;
+
+}
+
+ .post-comment-author {
+    display: flex;
+    justify-content: flex-start;
+  
+}
+
+.author-name-icon {
+    display: flex;
+    flex: 1;
+}
+.post-comment-author span {
+    margin: 0 10px; 
+    display: block;
+}
+
+.post-comments-container {
+    margin-top: 5%;
+}
