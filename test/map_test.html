@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset='utf-8' />
@@ -215,7 +215,8 @@
             // this is where the code from the next step will go
         });
 
-        map.on('click', ({ lngLat }) => {
+        
+        map.on('click', function ({ lngLat }) {
             const coords = Object.keys(lngLat).map((key) => lngLat[key]);
             const end = {
                 type: 'FeatureCollection',
@@ -260,6 +261,7 @@
             }
             getRoute(coords);
         });
+        
 
 
     </script>
