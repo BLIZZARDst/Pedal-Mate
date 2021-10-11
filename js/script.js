@@ -248,10 +248,10 @@ function setInputFocus(num) {
 	input_foucus = num;
 	if (num == 1) {
 		document.getElementById("start-address").style.borderColor = "#6a0dad";
-		document.getElementById("end-address").style.borderColor = "grey";
+		document.getElementById("end-address").style.borderColor = "lightgrey";
 	}	
 	else if (num == 2) {
 		document.getElementById("end-address").style.borderColor = "#FF0000";
-		document.getElementById("start-address").style.borderColor = "grey";
+		document.getElementById("start-address").style.borderColor = "lightgrey";
 	}
 }
