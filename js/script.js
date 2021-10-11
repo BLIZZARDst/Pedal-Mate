@@ -8,17 +8,6 @@ const map = new mapboxgl.Map({
 	zoom: 12
 });
 
-// set the bounds of the map
-/*
-const bounds = [
-	[-123.069003, 45.395273],
-	[-122.303707, 45.612333]
-];
-*/
-// map.setMaxBounds(bounds);
-
-// an arbitrary start will always be the same
-// only the end or destination will change
 var coords_start = [153, -27.5];
 var coords_end = [153, -27.5];
 
@@ -70,23 +59,37 @@ async function getRoute() {
 			}
 		});
 	}
+	
+	const bbox = [[coords_start[0], coords_start[1]], [coords_end[0], coords_end[1]]];
+	camera = map.cameraForBounds(bbox);
+	console.log(camera)
+	map.setZoom(camera.zoom - 0.8);
+	center = [0.5 * (coords_start[0] + coords_end[0]), 0.5 * (coords_start[1] + coords_end[1])];
+	
+	
+	map.flyTo({
+		center: center,
+		essential: true,
+		screenSpeed: 1,
+		easing: (t) => {
+			return t;
+		}
+	});
+	
 	// add turn instructions here at the end
 	// get the sidebar and add the instructions
 }
 
 map.on('load', () => {
-	// make an initial directions request that
-	// starts and ends at the same location
 	// getRoute();
 	map.setLayoutProperty('country-label', 'text-field', ['format',
-		['get', 'name_en'], { 'font-scale': 20.2 },
+		['get', 'name_en'], { 'font-scale': 1.2 },
 		'\n', {},
 		['get', 'name'], {
-		'font-scale': 10.8,
+		'font-scale': 0.8,
 		'text-font': ['literal', [ 'DIN Offc Pro Italic', 'Arial Unicode MS Regular' ]]
 		}
 	]);
-	// this is where the code from the next step will go
 });
 
 
@@ -122,8 +125,8 @@ function placeToCoords() {
 			index = coords.search("]");
 			coords = coords.substring(0, index).split(",");
 			
-			//document.getElementById("coordinate").innerHTML = coords;
-			coords_start = coords;
+			coords_start = [parseFloat(coords[0]), parseFloat(coords[1])];
+			console.log("coords_start: " + coords_start)
 			drawStart(coords_start);
 			_placeToCoords();
 		}
@@ -147,7 +150,8 @@ function _placeToCoords() {
 			index = coords.search("]");
 			coords = coords.substring(0, index).split(",");
 			
-			coords_end = coords;
+			coords_end = [parseFloat(coords[0]), parseFloat(coords[1])];
+			console.log("coords_end: " + coords_end)
 			drawEnd(coords_end);
 			getRoute();
 		}
