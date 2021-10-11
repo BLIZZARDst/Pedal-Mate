@@ -6,9 +6,8 @@
     <title>Pedal Mate</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js'></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet' />
-    <link rel='stylesheet prefetch' href='https://api.mapbox.com/mapbox-gl-js/v0.23.0/mapbox-gl.css'>
+	<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.css' rel='stylesheet' />
 </head>
 
 <body>
@@ -18,73 +17,28 @@
         </div>
     </header>
     <div class="outer-map-container">
-    <div class="map-container">
-        <div id="map">dada</div>
-        <pre id="info"></pre>
+		<div class="map-container">
+			<div id="map"></div>
+			<pre id="info"></pre>
+			<script src="js/script.js"></script>
+		</div>
 
-        <div id="menu">
-            <input id="satellite-v9" type="radio" name="rtoggle" value="satellite" checked="checked">
-
-            <label for="satellite-v9">satellite</label>
-            <input id="light-v10" type="radio" name="rtoggle" value="light">
-            <label for="light-v10">light</label>
-            <input id="dark-v10" type="radio" name="rtoggle" value="dark">
-            <label for="dark-v10">dark</label>
-            <input id="streets-v11" type="radio" name="rtoggle" value="streets">
-            <label for="streets-v11">streets</label>
-            <input id="outdoors-v11" type="radio" name="rtoggle" value="outdoors">
-            <label for="outdoors-v11">outdoors</label>
-        </div>
-
-
-        <script>
-            mapboxgl.accessToken = 'pk.eyJ1IjoiMTIzMThsaCIsImEiOiJja3RyZWQzd20wemMyMm9sODN0ejIzenVsIn0.7pd4Q6IV8POVEX8Pk1-f4A';
-            const map = new mapboxgl.Map({
-                container: 'map',
-                style: 'mapbox://styles/mapbox/streets-v11',
-                center: [153.030, -27.487], // starting position
-                zoom: 9 // starting zoom
-            });
-
-            const layerList = document.getElementById('menu');
-            const inputs = layerList.getElementsByTagName('input');
-
-            for (const input of inputs) {
-                input.onclick = (layer) => {
-                    const layerId = layer.target.id;
-                    map.setStyle('mapbox://styles/mapbox/' + layerId);
-                };
-            }
-
-            map.addControl(new mapboxgl.NavigationControl());
-
-            map.on('mousemove', function (e) {
-                document.getElementById('info').innerHTML =       /* innerHTML 属性设置或返回表格行的开始和结束标签之间的 HTML  */
-                    // e.point is the x, y coordinates of the mousemove event relative
-                    // to the top-left corner of the map
-                    JSON.stringify(e.point) + '<br />' +
-                    // e.lngLat is the longitude, latitude geographical position of the event
-                    JSON.stringify(e.lngLat);  /* JSON.stringify() 方法可以将任意的 JavaScript 值序列化成 JSON 字符串 */
-            });
-        </script>
-    </div>
-
-    <section id="search-panel">
-        <input type="text" class="search-bar" size="100" placeholder="From">
-        <input type="text" class="search-bar" size="100" placeholder="To">
-        <div class="route-button-container">
-            <a class="route-button" href="./search.html">
-                <img class="route-button-icon" src="images/back.jpg">
-                <div class="route-button-txt">Back</div>
-            </a>
-            <div class="route-button">
-                <img class="route-button-icon" src="images/go.jpg">
-                <div class="route-button-txt">Go</div>
-            </div>
-        </div>
-        </div>
-    </section>
-</div>
+		<section id="search-panel">
+			<input type="text" id="start-address" class="search-bar" size="100" placeholder="From" onclick=setInputFocus(1)>
+			<input type="text" id="end-address" class="search-bar" size="100" placeholder="To" onclick=setInputFocus(2)>
+			<div class="route-button-container">
+				<a class="route-button" href="./search.html">
+					<img class="route-button-icon" src="images/back.jpg">
+					<div class="route-button-txt">Back</div>
+				</a>
+				<div class="route-button">
+					<img class="route-button-icon" src="images/go.jpg" onclick=placeToCoords()>
+					<div class="route-button-txt">Go</div>
+				</div>
+			</div>
+		
+		</section>
+	</div>
 
    <footer class="nav-bar">
         <div class="nav-button">
