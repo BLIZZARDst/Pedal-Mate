@@ -3,8 +3,7 @@
 var input_foucus = 0;
 const START_COLOR = "#8877ff";
 const END_COLOR = "#f7347a";
-const ROUTE_COLOR = "#3887be";
-const LINE_COLOR = "#1EA362";
+const ROUTE_COLOR = "#1EA362";
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYmxpenphcmRzdCIsImEiOiJja3RyeTlranYxYjl1Mm5taGJmM3Q5OGNtIn0.MbVlF587At3aXBaTg_5Uow';
 const map = new mapboxgl.Map({
@@ -12,6 +11,7 @@ const map = new mapboxgl.Map({
 	style: 'mapbox://styles/mapbox/streets-v11',
 	center: [153, -27.5], // starting position
 	zoom: 12
+	
 });
 
 var coords_start = [153, -27.5];
@@ -61,7 +61,7 @@ async function getRoute() {
 				'line-cap': 'round'
 			},
 			paint: {
-				'line-color': LINE_COLOR,//'#3887be',
+				'line-color': ROUTE_COLOR,//'#3887be',
 				'line-width': 8,
 				'line-opacity': 0.75
 			}
@@ -90,11 +90,11 @@ async function getRoute() {
 
 map.on('load', () => {
 	// getRoute();
-	map.setLayoutProperty('country-label', 'text-field', ['format',
-		['get', 'name_en'], { 'font-scale': 1.2 },
+	map.setLayoutProperty('road-label', 'text-field', ['format',
+		['get', 'name_en'], { 'font-scale': 11.2 },
 		'\n', {},
 		['get', 'name'], {
-		'font-scale': 0.8,
+		'font-scale': 10.8,
 		'text-font': ['literal', [ 'DIN Offc Pro Italic', 'Arial Unicode MS Regular' ]]
 		}
 	]);
@@ -343,13 +343,11 @@ function setInputFocus(num) {
 	if (num == 1) {
 		document.getElementById("start-address").style.borderColor = START_COLOR;
 		document.getElementById("end-address").style.borderColor = "lightgrey";
-		document.getElementById("map").style.borderStyle = "solid";
 		document.getElementById("map").style.borderColor = START_COLOR;
 	}	
 	else if (num == 2) {
 		document.getElementById("end-address").style.borderColor = END_COLOR;
 		document.getElementById("start-address").style.borderColor = "lightgrey";
-		document.getElementById("map").style.borderStyle = "solid";
 		document.getElementById("map").style.borderColor = END_COLOR;
 	}
 }
