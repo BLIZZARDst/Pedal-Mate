@@ -37,7 +37,7 @@ async function getRoute() {
 	};
 	// if the route already exists on the map, we'll reset it using setData
 	if (map.getSource('route')) {
-		map.removeLayer('route');
+		// map.removeLayer('route');
 		map.getSource('route').setData(geojson);
 	}
 	// otherwise, we'll make a new request
