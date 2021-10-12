@@ -4,6 +4,7 @@ var input_foucus = 0;
 const START_COLOR = "#8877ff";
 const END_COLOR = "#f7347a";
 const ROUTE_COLOR = "#3887be";
+const MAP_TEXT_COLOR = "#FF0000";
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYmxpenphcmRzdCIsImEiOiJja3RyeTlranYxYjl1Mm5taGJmM3Q5OGNtIn0.MbVlF587At3aXBaTg_5Uow';
 const map = new mapboxgl.Map({
@@ -179,8 +180,19 @@ function drawStart(coords) {
 			}
 		]
 	};
+	const start_text = {
+		"geometry": {
+			"type": "Point",
+			"coordinates": [coords[0], coords[1]]
+		},
+		"type": "Feature",
+		"properties": {
+			"text": "Start",
+		}
+    };	
 	if (map.getLayer('start')) {
 		map.getSource('start').setData(start);
+		map.getSource('start_text').setData(start_text);
 	} 
 	else {
 		map.addLayer({
@@ -207,6 +219,36 @@ function drawStart(coords) {
 				'circle-color': START_COLOR
 			}
 		});
+		
+		map.addSource('start_text', {
+			type: "geojson",
+			data: start_text
+		});
+		map.addLayer({
+			"id": 'start_text_layer',
+			"type": "symbol",
+			"minzoom": 0,
+			"maxzoom": 22,
+			"source": 'start_text',
+			"layout": {
+				"text-field": [
+					"format", 
+					["get", "text"], 
+					{
+						"text-font": ["literal", ["Open Sans Regular"]],
+						"text-color": START_COLOR,
+						"font-scale": 3
+					}
+				],
+				"text-size": 16,
+				"text-font": ["Open Sans Regular", "Arial Unicode MS Regular"],
+				"text-offset": [1, 0],
+				"text-anchor": "left",
+				"text-justify": "left",
+				"text-max-width": 20,
+				"text-allow-overlap": false,
+			}
+		});
 	}
 }
 
@@ -224,8 +266,19 @@ function drawEnd(coords) {
 			}
 		]
 	};
+	const end_text = {
+		"geometry": {
+			"type": "Point",
+			"coordinates": [coords[0], coords[1]]
+		},
+		"type": "Feature",
+		"properties": {
+			"text": "End",
+		}
+    };	
 	if (map.getLayer('end')) {
 		map.getSource('end').setData(end);
+		map.getSource('end_text').setData(end_text);
 	} 
 	else {
 		map.addLayer({
@@ -250,6 +303,36 @@ function drawEnd(coords) {
 			paint: {
 				'circle-radius': 10,
 				'circle-color': END_COLOR
+			}
+		});
+		
+		map.addSource('end_text', {
+			type: "geojson",
+			data: end_text
+		});
+		map.addLayer({
+			"id": 'end_text_layer',
+			"type": "symbol",
+			"minzoom": 0,
+			"maxzoom": 22,
+			"source": 'end_text',
+			"layout": {
+				"text-field": [
+					"format", 
+					["get", "text"], 
+					{
+						"text-font": ["literal", ["Open Sans Regular"]],
+						"text-color": END_COLOR,
+						"font-scale": 3
+					}
+				],
+				"text-size": 16,
+				"text-font": ["Open Sans Regular", "Arial Unicode MS Regular"],
+				"text-offset": [1, 0],
+				"text-anchor": "left",
+				"text-justify": "left",
+				"text-max-width": 20,
+				"text-allow-overlap": false,
 			}
 		});
 	}
