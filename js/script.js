@@ -1,4 +1,9 @@
+/* Global constants & variables */
+
 var input_foucus = 0;
+const START_COLOR = "#8877ff";
+const END_COLOR = "#f7347a";
+const ROUTE_COLOR = "#3887be";
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYmxpenphcmRzdCIsImEiOiJja3RyeTlranYxYjl1Mm5taGJmM3Q5OGNtIn0.MbVlF587At3aXBaTg_5Uow';
 const map = new mapboxgl.Map({
@@ -11,7 +16,8 @@ const map = new mapboxgl.Map({
 var coords_start = [153, -27.5];
 var coords_end = [153, -27.5];
 
-// create a function to make a directions request
+/* Functions */
+
 async function getRoute() {
 	if (! (map.getLayer('start') && map.getLayer('end'))) {
 		console.log("No start or end!")
@@ -115,7 +121,7 @@ function placeToCoords() {
 	search_location = search_location.replace(/ /g, "%20");
 	search_location = search_location.replace(/,/g, "%20");
 	console.log(search_location);
-	const url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/' + search_location + '.json?access_token=pk.eyJ1IjoiYmxpenphcmRzdCIsImEiOiJja3RyeTlranYxYjl1Mm5taGJmM3Q5OGNtIn0.MbVlF587At3aXBaTg_5Uow';
+	const url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/' + search_location + `.json?access_token=${mapboxgl.accessToken}`;
 	Http.open("GET", url);
 	Http.send();
 	Http.onreadystatechange = function() {
@@ -140,7 +146,7 @@ function _placeToCoords() {
 	search_location = search_location.replace(/ /g, "%20");
 	search_location = search_location.replace(/,/g, "%20");
 	console.log(search_location);
-	const url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/' + search_location + '.json?access_token=pk.eyJ1IjoiYmxpenphcmRzdCIsImEiOiJja3RyeTlranYxYjl1Mm5taGJmM3Q5OGNtIn0.MbVlF587At3aXBaTg_5Uow';
+	const url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/' + search_location + `.json?access_token=${mapboxgl.accessToken}`;
 	Http.open("GET", url);
 	Http.send();
 	Http.onreadystatechange = function() {
@@ -198,7 +204,7 @@ function drawStart(coords) {
 			},
 			paint: {
 				'circle-radius': 10,
-				'circle-color': '#6a0dad'
+				'circle-color': START_COLOR
 			}
 		});
 	}
@@ -243,7 +249,7 @@ function drawEnd(coords) {
 			},
 			paint: {
 				'circle-radius': 10,
-				'circle-color': '#FF0000'
+				'circle-color': END_COLOR
 			}
 		});
 	}
@@ -252,11 +258,15 @@ function drawEnd(coords) {
 function setInputFocus(num) {
 	input_foucus = num;
 	if (num == 1) {
-		document.getElementById("start-address").style.borderColor = "#6a0dad";
+		document.getElementById("start-address").style.borderColor = START_COLOR;
 		document.getElementById("end-address").style.borderColor = "lightgrey";
+		document.getElementById("map").style.borderStyle = "solid";
+		document.getElementById("map").style.borderColor = START_COLOR;
 	}	
 	else if (num == 2) {
-		document.getElementById("end-address").style.borderColor = "#FF0000";
+		document.getElementById("end-address").style.borderColor = END_COLOR;
 		document.getElementById("start-address").style.borderColor = "lightgrey";
+		document.getElementById("map").style.borderStyle = "solid";
+		document.getElementById("map").style.borderColor = END_COLOR;
 	}
 }
