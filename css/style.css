@@ -351,9 +351,17 @@ margin-left: 25px;
     width: 50%;
     margin: 0 auto;
 }
-.snap-container .post .post-image-container img{
-    width: 100%;
+
+.post-image-container {
+    background-color: white;
 }
+
+ .post-image-container img{
+    width: 50%;
+    display: block;
+    margin: 0 auto;
+}
+
 
 .post-details {
     display:flex;
@@ -447,4 +455,54 @@ margin-left: 25px;
 .subboNav a{
     text-decoration: none;
     color: #222;
+}
+
+/* Feed Page */
+
+.main-feed {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.second-post {
+    height: 40px;
+}
+.second-post-img {
+    width:50%;
+}
+
+.second-post-img img {
+    width: 100%;
+}
+
+.img-details-container {
+    display: flex;
+}
+
+.left-post-buttons {
+    display: flex;
+}
+
+.icon-text {
+    margin-left: 20px;
+}
+.time {
+    width: 108%;
+    margin-top: 25px;
+    height: 20%;
+}
+
+/* Notifications Page */
+
+.notifications-header {
+    margin-left: 15%;
+    margin-top: 20%;
+}
+
+.new-notifications {
+    padding: 9%;
+}
+
+.comment-author-name {
+    font-weight: bold;
 }
