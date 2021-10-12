@@ -4,7 +4,7 @@ var input_foucus = 0;
 const START_COLOR = "#8877ff";
 const END_COLOR = "#f7347a";
 const ROUTE_COLOR = "#3887be";
-const MAP_TEXT_COLOR = "#FF0000";
+const LINE_COLOR = "#1EA362";
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYmxpenphcmRzdCIsImEiOiJja3RyeTlranYxYjl1Mm5taGJmM3Q5OGNtIn0.MbVlF587At3aXBaTg_5Uow';
 const map = new mapboxgl.Map({
@@ -20,7 +20,7 @@ var coords_end = [153, -27.5];
 /* Functions */
 
 async function getRoute() {
-	if (! (map.getLayer('start') && map.getLayer('end'))) {
+	if (!(map.getLayer('start') && map.getLayer('end'))) {
 		console.log("No start or end!")
 		return;
 	}
@@ -61,8 +61,8 @@ async function getRoute() {
 				'line-cap': 'round'
 			},
 			paint: {
-				'line-color': '#3887be',
-				'line-width': 5,
+				'line-color': LINE_COLOR,//'#3887be',
+				'line-width': 8,
 				'line-opacity': 0.75
 			}
 		});
@@ -215,7 +215,7 @@ function drawStart(coords) {
 				}
 			},
 			paint: {
-				'circle-radius': 10,
+				'circle-radius': 12,
 				'circle-color': START_COLOR
 			}
 		});
@@ -242,7 +242,7 @@ function drawStart(coords) {
 				],
 				"text-size": 16,
 				"text-font": ["Open Sans Regular", "Arial Unicode MS Regular"],
-				"text-offset": [1, 0],
+				"text-offset": [1.2, 0],
 				"text-anchor": "left",
 				"text-justify": "left",
 				"text-max-width": 20,
@@ -301,7 +301,7 @@ function drawEnd(coords) {
 				}
 			},
 			paint: {
-				'circle-radius': 10,
+				'circle-radius': 12,
 				'circle-color': END_COLOR
 			}
 		});
@@ -328,7 +328,7 @@ function drawEnd(coords) {
 				],
 				"text-size": 16,
 				"text-font": ["Open Sans Regular", "Arial Unicode MS Regular"],
-				"text-offset": [1, 0],
+				"text-offset": [1.2, 0],
 				"text-anchor": "left",
 				"text-justify": "left",
 				"text-max-width": 20,
