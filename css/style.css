@@ -536,6 +536,7 @@ margin-left: 25px;
     font-weight: bold;
 }
 
+<<<<<<< Updated upstream
 #instruction {
 	height: 20em;
     overflow: auto;
@@ -565,3 +566,5 @@ margin-left: 25px;
 #time-length-txt {
 	font-size: 3em;
 }
+=======
+>>>>>>> Stashed changes
