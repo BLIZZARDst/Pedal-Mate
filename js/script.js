@@ -6,6 +6,7 @@ const END_COLOR = "#f7347a";
 const ROUTE_COLOR = "#1EA362";
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYmxpenphcmRzdCIsImEiOiJja3RyeTlranYxYjl1Mm5taGJmM3Q5OGNtIn0.MbVlF587At3aXBaTg_5Uow';
+
 const map = new mapboxgl.Map({
 	container: 'map',
 	style: 'mapbox://styles/mapbox/streets-v11',
