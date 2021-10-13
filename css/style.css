@@ -506,3 +506,33 @@ margin-left: 25px;
 .comment-author-name {
     font-weight: bold;
 }
+
+#instruction {
+	height: 20em;
+    overflow: auto;
+	padding: 0% 5% 0% 5%;
+	margin-top: -5%;
+	margin-bottom: 5%;
+	line-height: 3em;	
+	background-color: #c9deff;
+}
+
+.time-icon {
+    height: 6vw;
+	width: 6vw;
+    padding: 0 5% 0 5%;
+	margin-bottom: -5%; 
+    user-select: none;
+}
+
+.direction-time-container {
+	margin-top: -8%;
+	margin-bottom: -3%;
+	height: 5vw;
+    display: flex;
+    flex-direction: row;
+}
+
+#time-length-txt {
+	font-size: 3em;
+}

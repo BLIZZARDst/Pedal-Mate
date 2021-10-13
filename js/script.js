@@ -11,7 +11,6 @@ const map = new mapboxgl.Map({
 	style: 'mapbox://styles/mapbox/streets-v11',
 	center: [153, -27.5], // starting position
 	zoom: 12
-	
 });
 
 var coords_start = [153, -27.5];
@@ -19,7 +18,7 @@ var coords_end = [153, -27.5];
 
 /* Functions */
 
-async function getRoute() {
+async function getRoute(show=false) {
 	if (!(map.getLayer('start') && map.getLayer('end'))) {
 		console.log("No start or end!")
 		return;
@@ -86,6 +85,18 @@ async function getRoute() {
 	
 	// add turn instructions here at the end
 	// get the sidebar and add the instructions
+	if (show) {
+		const instruction = document.getElementById('instruction');
+		const steps = data.legs[0].steps;
+	
+		let tripInstructions = '';
+		for (const step of steps) {
+			tripInstructions += `<li>${step.maneuver.instruction}</li>`;
+		}
+		instruction.innerHTML = `<ol>${tripInstructions}</ol>`;
+		const time_length = Math.floor(data.duration / 60);
+		document.getElementById("time-length-txt").innerHTML = "Estimated " + time_length + " min";
+	}
 }
 
 map.on('load', () => {
@@ -351,3 +362,33 @@ function setInputFocus(num) {
 		document.getElementById("map").style.borderColor = END_COLOR;
 	}
 }
+
+function goDirection() {
+	window.location.href = "./direction.html?start=" + coords_start + "&end=" + coords_end;
+}
+
+function getQueryVariable(varName) {
+       var query = window.location.search.substring(1);
+       var vars = query.split("&");
+       for (var i = 0; i < vars.length; i++) {
+               var pair = vars[i].split("=");
+               if(pair[0] == varName)
+				   return pair[1];
+       }
+       return(false);
+}
+
+function showDirection() {
+	coords_start = getQueryVariable("start").split(",");
+	coords_start = [parseFloat(coords_start[0]), parseFloat(coords_start[1])];
+	coords_end = getQueryVariable("end").split(",");
+	coords_end = [parseFloat(coords_end[0]), parseFloat(coords_end[1])];
+	console.log(coords_start, coords_end);
+	drawStart(coords_start);
+	drawEnd(coords_end);
+	getRoute(show=true);
+}
+
+
+
+
