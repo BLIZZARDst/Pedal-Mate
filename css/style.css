@@ -213,7 +213,18 @@ input[type="text"]::placeholder {
     background-color: white;
     width: 100%;
     height: 12%;
+}
 
+.nav-bar2 {
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    bottom: 0;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    width: 100%;
+    height: 12%;
 }
 
 .nav-button {
@@ -223,6 +234,7 @@ input[type="text"]::placeholder {
     justify-content: center;
     align-items: center;
     padding: 0% 4% 0% 4%;
+	text-decoration: none
 }
 
 .nav-button-icon {
@@ -231,7 +243,7 @@ input[type="text"]::placeholder {
     user-select: none;
 }
 
-.nav-button-txt {
+.nav-bar .nav-button-txt {
     padding: 10% 5% 5% 5%;
     font-weight: 800;
     user-select: none;
@@ -240,11 +252,28 @@ input[type="text"]::placeholder {
     font-family: 'Roboto';
 }
 
-.nav-button-txt-select {
+.nav-bar2 .nav-button-txt {
+    padding: 10% 5% 5% 5%;
+    font-weight: 800;
+    user-select: none;
+    font-size: 0.765em;
+    color: black;
+    font-family: 'Roboto';
+}
+
+.nav-bar .nav-button-txt-select {
     padding: 10% 5% 5% 5%;
     font-weight: 800;
     user-select: none;
     font-size: 2em;
+    color: rgb(218, 0, 99);
+}
+
+.nav-bar2 .nav-button-txt-select {
+    padding: 10% 5% 5% 5%;
+    font-weight: 800;
+    user-select: none;
+    font-size: 0.765em;
     color: rgb(218, 0, 99);
 }
 
