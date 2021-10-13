@@ -20,7 +20,12 @@
             Hi Kristin,<br>
             where would you like to go?
         </div>
-        <input type="text" class="search-bar" size="100" placeholder="Search Activities Near Me">
+		<script>
+			function goUrl(url) {
+				window.location.href = url;
+			}
+		</script>
+        <input type="text" class="search-bar" size="100" placeholder="Search Activities Near Me" onclick=goUrl("./search_results.html")>
         <div class="search-button-container">
             <a class="search-button" href="./route.html">
                 <img class="search-button-icon" src="images/route.jpg">

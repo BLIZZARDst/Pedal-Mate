@@ -367,6 +367,10 @@ function goDirection() {
 	window.location.href = "./direction.html?start=" + coords_start + "&end=" + coords_end;
 }
 
+function goUrl(url) {
+	window.location.href = url;
+}
+
 function getQueryVariable(varName) {
        var query = window.location.search.substring(1);
        var vars = query.split("&");
