@@ -247,7 +247,7 @@ input[type="text"]::placeholder {
     padding: 10% 5% 5% 5%;
     font-weight: 800;
     user-select: none;
-    font-size: 2em;
+    font-size: 1em;
     color: black;
     font-family: 'Roboto';
 }
@@ -265,7 +265,7 @@ input[type="text"]::placeholder {
     padding: 10% 5% 5% 5%;
     font-weight: 800;
     user-select: none;
-    font-size: 2em;
+    font-size: 1em;
     color: rgb(218, 0, 99);
 }
 
@@ -493,6 +493,12 @@ margin-left: 25px;
     margin: 0 auto;
 }
 
+
+.fas.fa-images {
+    margin-left: 15px;
+    margin-right: 10px;
+}
+
 .second-post {
     height: 40px;
 }
@@ -506,6 +512,7 @@ margin-left: 25px;
 
 .img-details-container {
     display: flex;
+    justify-content: space-between;
 }
 
 .left-post-buttons {
@@ -513,12 +520,37 @@ margin-left: 25px;
 }
 
 .icon-text {
-    margin-left: 20px;
+    margin-left: 10px;
 }
 .time {
     width: 108%;
-    margin-top: 25px;
+    margin-top: 15px;
     height: 20%;
+    font-size: 12px;
+}
+
+.second-post-img {
+    width: 46%;
+}
+
+.second-post-img p {
+    text-align: center;
+}
+
+.second-post-details {
+    width: 46%;
+}
+
+.second-post-details .time span {
+    margin-right: 10px;
+}
+.people .fas.fa-users {
+    margin-right: 5px;
+}
+
+.people {
+    margin-top: 8px;
+    font-size: 12px;
 }
 
 /* Notifications Page */
