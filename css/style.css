@@ -317,13 +317,13 @@ input[type="text"]::placeholder {
     height: 100px;
 }
 
-/* search_activities css */
+/* search_activities and created activities css */
 .activity .img-container {
-    width: 200px;
+    width: 272px;
 }
 
 .img-container img {
-    width: 100%;
+    width: 172%;
 }
 
 .activities-container {
@@ -334,14 +334,29 @@ input[type="text"]::placeholder {
     margin-bottom: 100px;
 }
 
+.activities-container h1{
+    font-size: 5em;
+    margin-top: 12%;
+}
+
+.activities-container p {
+    font-size:3em;
+}
+
+.activities-container .activity {
+    width:96%;
+    padding: 25px;
+}
+
 .img-text {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 12px;
 }
 
 .text-container {
-margin-left: 25px;
+margin-left: 246px;
 }
 
 /* search_results */
@@ -354,8 +369,12 @@ margin-left: 25px;
 
 .outer-articles-container .nav_bar {
     font-size: 2vw;
+    margin-top: 40px;
 }
 
+.articles-container .article{
+    margin-top:75px;
+}
 .articles-container .article {
     width: 100%;
 
@@ -372,6 +391,8 @@ margin-left: 25px;
 
 }
 
+/* Few additional elements to the Search page */
+
 
 /* Photo_sharing_template */
 
@@ -381,11 +402,11 @@ margin-left: 25px;
 }
 
 .post-image-container {
-    background-color: white;
+    background-color:#c9d7ffb5;
 }
 
  .post-image-container img{
-    width: 50%;
+    width: 72%;
     display: block;
     margin: 0 auto;
 }
@@ -395,6 +416,7 @@ margin-left: 25px;
     display:flex;
     justify-content: space-around;
     flex-wrap: wrap;
+    font-size:270%;
 }
 
 .post-details .left-post-buttons {
@@ -492,6 +514,15 @@ margin-left: 25px;
     margin: 0 auto;
 }
 
+.main-feed h1{
+    font-size: 5em;
+    text-align: center;
+}
+
+.main-post p {
+    font-size: 400%;
+}
+
 
 .fas.fa-images {
     margin-left: 15px;
@@ -500,6 +531,7 @@ margin-left: 25px;
 
 .second-post {
     height: 40px;
+    font-size: 270%;
 }
 .second-post-img {
     width:50%;
@@ -519,13 +551,17 @@ margin-left: 25px;
 }
 
 .icon-text {
-    margin-left: 10px;
+    margin-left: 30px;
 }
 .time {
     width: 108%;
     margin-top: 15px;
     height: 20%;
-    font-size: 12px;
+    font-size: 84%;
+}
+
+.second-post p{
+    font-weight:600;
 }
 
 .second-post-img {
@@ -549,7 +585,7 @@ margin-left: 25px;
 
 .people {
     margin-top: 8px;
-    font-size: 12px;
+    font-size: 84%;
 }
 
 /* Notifications Page */
@@ -557,10 +593,16 @@ margin-left: 25px;
 .notifications-header {
     margin-left: 15%;
     margin-top: 20%;
+    font-size: 500%;
 }
 
 .new-notifications {
     padding: 9%;
+    font-size: 400%;
+}
+
+.post-comment {
+    font-size: 312%;
 }
 
 .comment-author-name {
