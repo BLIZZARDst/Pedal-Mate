@@ -355,6 +355,7 @@ margin-left: 25px;
 .outer-articles-container .nav_bar {
     font-size: 2vw;
 }
+
 .articles-container .article {
     width: 100%;
 
@@ -362,8 +363,6 @@ margin-left: 25px;
 
 .articles-container .article img {
     width:100%;
-    
-
 }
 
 .articles-container .article .article-text {
