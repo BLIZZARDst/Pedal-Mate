@@ -1,7 +1,7 @@
 body {
     background-color: rgb(225, 245, 255);
     margin: 0 0 0 0;
-    font-family: 'Roboto', 'Arial', sans-serif;
+    /* font-family: 'Roboto', 'Arial', sans-serif; */
 }
 
 header {
@@ -393,7 +393,7 @@ margin-left: 246px;
 /* Photo_sharing_template */
 
 .snap-container {
-    width: 50%;
+    width: 51%;
     margin: 0 auto;
 }
 
@@ -424,13 +424,15 @@ margin-left: 246px;
 
  .post-comment-author {
     display: flex;
+    font-size: 5;
     justify-content: flex-start;
-  
 }
 
 .author-name-icon {
     display: flex;
     flex: 1;
+    font-size: 2;
+    font-size: 5;
 }
 .post-comment-author span {
     margin: 0 10px; 
@@ -598,7 +600,7 @@ margin-left: 246px;
 }
 
 .post-comment {
-    font-size: 312%;
+    font-size: 310%;
 }
 
 .comment-author-name {
