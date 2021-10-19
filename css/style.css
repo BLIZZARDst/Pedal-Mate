@@ -393,8 +393,8 @@ margin-left: 246px;
 /* Photo_sharing_template */
 
 .snap-container {
-    width: 51%;
-    margin: 0 auto;
+    width: 100%;
+    /* margin: 0 auto; */
 }
 
 .post-image-container {
@@ -413,6 +413,7 @@ margin-left: 246px;
     justify-content: space-around;
     flex-wrap: wrap;
     font-size:270%;
+    margin-top:19px;
 }
 
 .post-details .left-post-buttons {
@@ -424,7 +425,7 @@ margin-left: 246px;
 
  .post-comment-author {
     display: flex;
-    font-size: 5;
+    font-size: 2em;
     justify-content: flex-start;
 }
 
@@ -435,7 +436,7 @@ margin-left: 246px;
     font-size: 5;
 }
 .post-comment-author span {
-    margin: 0 10px; 
+    margin: 8px 13px; 
     display: block;
 }
 
@@ -600,7 +601,8 @@ margin-left: 246px;
 }
 
 .post-comment {
-    font-size: 310%;
+    font-size: 137%;
+    align-items: center;
 }
 
 .comment-author-name {
