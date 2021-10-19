@@ -17,11 +17,13 @@ const map = new mapboxgl.Map({
 var coords_start = [153, -27.5];
 var coords_end = [153, -27.5];
 
+//var fountainData = retrieveData();
+
 /* Functions */
 
 async function getRoute(show=false) {
 	if (!(map.getLayer('start') && map.getLayer('end'))) {
-		console.log("No start or end!")
+		console.log("No start or end!");
 		return;
 	}
 	
@@ -110,6 +112,89 @@ map.on('load', () => {
 		'text-font': ['literal', [ 'DIN Offc Pro Italic', 'Arial Unicode MS Regular' ]]
 		}
 	]);
+	fountainData = JSON.parse(localStorage.getItem("fountainData"));
+	console.log("fountainData =", fountainData);
+	fountainRecords = fountainData.result.records;
+	fountainNum = fountainRecords.length;
+	console.log("fountainNum =", fountainNum);
+	var x = new Array(fountainNum);
+	var y = new Array(fountainNum)
+	var fcoords = [];
+	var features = []
+	for (var i = 0; i < fountainNum; i++) {
+		x[i] = fountainRecords[i].X;
+		y[i] = fountainRecords[i].Y;
+		features.push({
+						'type': 'Feature',
+						'geometry': {
+							'type': 'Point',
+							'coordinates': [x[i], y[i]]
+						}
+					})
+	}
+	console.log("features =", features);
+	// console.log("x[] =", x);
+	// console.log("y[] =", y);
+	/*
+	const fountainIcon = {
+		"geometry": {
+			"type": "Point",
+			"coordinates": [x[0], y[0]]
+		},
+		"type": "Feature",
+		"properties": {
+			//"text": "Start",
+		}
+    };
+	
+	map.addSource('fountainIcon', {
+		type: "geojson",
+		data: fountainIcon
+	});
+	
+	map.addLayer({
+		"id": "markers",
+		"type": "symbol",
+		"source": "fountainIcon",
+		"layout": {
+			"icon-image": "{marker-symbol}-15",
+			"text-field": "{title}",
+			"text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+			"text-offset": [0, 0.6],
+			"text-anchor": "top"
+		}
+	});
+	*/
+
+
+	//iconImage = new Image(300, 300);
+	//iconImage.src = './images/fountain.png';
+	//map.loadImage('https://docs.mapbox.com/mapbox-gl-js/assets/cat.png', function(error, image) {
+		//if (error) throw error;
+		//map.addImage('fountain', image);
+		//for (var i = 0; i < fountainNum; i++) {
+			console.log("dada");
+			map.addSource('point', {
+			'type': 'geojson',
+			'data': {
+				'type': 'FeatureCollection',
+				'features': features
+			}
+			});
+			console.log("dada2");
+			map.addLayer({
+				'id': "point",
+				'type': 'circle',
+				'source': 'point',
+				paint: {
+					'circle-radius': 4,
+					'circle-color': "#0000FF"
+				}
+			});
+			console.log("dada3");
+		//}
+	//});
+
 });
 
 
@@ -394,6 +479,37 @@ function showDirection() {
 	getRoute(show=true);
 }
 
+function retrieveData() {
+	$(document).ready(function() {
+		
+		var fountainData = JSON.parse(localStorage.getItem("fountainData"));
 
+		if (fountainData) {
+			console.log("Source: localStorage");
+			localStorage.clear();
+			// iterateRecords(fountainData);
+		}
+		console.log("Source: ajax call");
+		var data = {
+			// Drinking Fountain Tap
+			resource_id: "69c588f4-232a-4e71-88ee-045f8afb6880",
+			limit: 9999
+		}
+
+		$.ajax({
+			url: "https://www.data.brisbane.qld.gov.au/data/api/3/action/datastore_search",
+			data: data,
+			dataType: "jsonp", // We use "jsonp" to ensure AJAX works correctly locally (otherwise XSS).
+			cache: true,
+			success: function(data) {
+				localStorage.setItem("fountainData", JSON.stringify(data));
+				// iterateRecords(data);
+			}
+		});
+		
+		console.log(fountainData)
+		return fountainData;
+	});
+}
 
 
