@@ -486,7 +486,7 @@ function retrieveData() {
 
 		if (fountainData) {
 			console.log("Source: localStorage");
-			localStorage.clear();
+			// localStorage.clear();
 			// iterateRecords(fountainData);
 		}
 		console.log("Source: ajax call");
