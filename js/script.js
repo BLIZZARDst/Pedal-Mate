@@ -453,6 +453,10 @@ function goDirection() {
 	window.location.href = "./direction.html?start=" + coords_start + "&end=" + coords_end;
 }
 
+function setInputAddress() {
+	placeToCoords();
+}
+
 function goUrl(url) {
 	window.location.href = url;
 }
