@@ -17,7 +17,7 @@ const map = new mapboxgl.Map({
 var coords_start = [153, -27.5];
 var coords_end = [153, -27.5];
 
-//var fountainData = retrieveData();
+retrieveData();
 
 /* Functions */
 
@@ -503,6 +503,7 @@ function retrieveData() {
 			cache: true,
 			success: function(data) {
 				localStorage.setItem("fountainData", JSON.stringify(data));
+				console.log("Success!");
 				// iterateRecords(data);
 			}
 		});
