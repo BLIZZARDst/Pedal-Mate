@@ -10,7 +10,7 @@
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.css' rel='stylesheet' />
 </head>
 
-<body onclick=setInputAddress()>
+<body>
     <header>
         <div class="title-txt">
             Route
@@ -20,11 +20,22 @@
 		<div class="map-container">
 			<div id="map" style="border-style: solid; border-color: white; box-sizing: border-box"></div>
 		</div>
+		<div class="toggle-container">
+			<div class="toggle-button-txt" id="fountain-button" onclick=dataView("fountainData")>Fountain</div>
+			<div class="toggle-button-txt" id="wifi-button" onclick=dataView("wifiData")>Wi-Fi</div>
+			<div class="toggle-button-txt" id="park-button" onclick=dataView("parkData")>Park</div>
+			<div class="toggle-button-txt" id="hide-button" onclick=dataView("hideData")>Hide</div>
+		</div>
 	</div>
 
 	<section id="search-panel">
-		<input type="text" id="start-address" class="search-bar" size="100" placeholder="From" onclick=setInputFocus(1)>
-		<input type="text" id="end-address" class="search-bar" size="100" placeholder="To" onclick=setInputFocus(2)>
+		<div class="address-input-container">
+			<div>
+				<input type="text" id="start-address" class="search-bar2" size="100" placeholder="From" onclick=setInputFocus(1)>
+				<input type="text" id="end-address" class="search-bar2" size="100" placeholder="To" onclick=setInputFocus(2)>
+			</div>
+			<div id="find-button" onclick=setInputAddress()>Enter</div>
+		</div>
 		<div class="route-button-container">
 			<a class="route-button" href="./index.html">
 				<img class="route-button-icon" src="images/back.jpg">

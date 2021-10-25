@@ -112,18 +112,69 @@ map.on('load', () => {
 		'text-font': ['literal', [ 'DIN Offc Pro Italic', 'Arial Unicode MS Regular' ]]
 		}
 	]);
-	fountainData = JSON.parse(localStorage.getItem("fountainData"));
-	console.log("fountainData =", fountainData);
-	fountainRecords = fountainData.result.records;
+	dataView("fountainData");
+});
+
+function dataView(dataName) {
+	var color = "#FFFFFF";
+	switch (dataName) {
+		case "fountainData": {
+			color = "#0000FF"; 
+			document.getElementById("fountain-button").style.borderColor = color;
+			document.getElementById("wifi-button").style.borderColor = "white";
+			document.getElementById("park-button").style.borderColor = "white";
+			document.getElementById("hide-button").style.borderColor = "white";
+			break;
+		}
+		case "wifiData": {
+			color = "#FF00FF"; 
+			document.getElementById("fountain-button").style.borderColor = "white";
+			document.getElementById("wifi-button").style.borderColor = color;
+			document.getElementById("park-button").style.borderColor = "white";
+			document.getElementById("hide-button").style.borderColor = "white";
+			break;
+		}
+		case "parkData": {
+			color = "#006400"; 
+			document.getElementById("fountain-button").style.borderColor = "white";
+			document.getElementById("wifi-button").style.borderColor = "white";
+			document.getElementById("park-button").style.borderColor = color;
+			document.getElementById("hide-button").style.borderColor = "white";
+			break;
+		}
+		case "hideData": { 
+			color = "grey"; 
+			document.getElementById("fountain-button").style.borderColor = "white";
+			document.getElementById("wifi-button").style.borderColor = "white";
+			document.getElementById("park-button").style.borderColor = "white";
+			document.getElementById("hide-button").style.borderColor = color;
+			map.removeLayer('point');
+			map.removeSource('point');
+			return;
+		}
+	}
+	selectedData = JSON.parse(localStorage.getItem(dataName));
+	// console.log(dataName, "=", selectedData);
+	fountainRecords = selectedData.result.records;
 	fountainNum = fountainRecords.length;
-	console.log("fountainNum =", fountainNum);
+	// console.log("dataNum =", fountainNum);
 	var x = new Array(fountainNum);
 	var y = new Array(fountainNum)
 	var fcoords = [];
 	var features = []
 	for (var i = 0; i < fountainNum; i++) {
-		x[i] = fountainRecords[i].X;
-		y[i] = fountainRecords[i].Y;
+		if (dataName == "fountainData") {
+			x[i] = fountainRecords[i].X;
+			y[i] = fountainRecords[i].Y;
+		}
+		else if (dataName == "wifiData") {
+			x[i] = fountainRecords[i].Longitude;
+			y[i] = fountainRecords[i].Latitude;
+		}
+		else if (dataName == "parkData") {
+			x[i] = fountainRecords[i].LONG;
+			y[i] = fountainRecords[i].LAT;
+		}
 		features.push({
 						'type': 'Feature',
 						'geometry': {
@@ -132,70 +183,31 @@ map.on('load', () => {
 						}
 					})
 	}
-	console.log("features =", features);
-	// console.log("x[] =", x);
-	// console.log("y[] =", y);
-	/*
-	const fountainIcon = {
-		"geometry": {
-			"type": "Point",
-			"coordinates": [x[0], y[0]]
-		},
-		"type": "Feature",
-		"properties": {
-			//"text": "Start",
-		}
-    };
+	// console.log("features =", features);
 	
-	map.addSource('fountainIcon', {
-		type: "geojson",
-		data: fountainIcon
-	});
-	
-	map.addLayer({
-		"id": "markers",
-		"type": "symbol",
-		"source": "fountainIcon",
-		"layout": {
-			"icon-image": "{marker-symbol}-15",
-			"text-field": "{title}",
-			"text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
-			"text-offset": [0, 0.6],
-			"text-anchor": "top"
+	if (map.getLayer('point')) {
+		map.removeLayer('point');
+		map.removeSource('point');
+	}
+
+	map.addSource('point', {
+	'type': 'geojson',
+	'data': {
+		'type': 'FeatureCollection',
+		'features': features
 		}
 	});
-	*/
 
-
-	//iconImage = new Image(300, 300);
-	//iconImage.src = './images/fountain.png';
-	//map.loadImage('https://docs.mapbox.com/mapbox-gl-js/assets/cat.png', function(error, image) {
-		//if (error) throw error;
-		//map.addImage('fountain', image);
-		//for (var i = 0; i < fountainNum; i++) {
-			console.log("dada");
-			map.addSource('point', {
-			'type': 'geojson',
-			'data': {
-				'type': 'FeatureCollection',
-				'features': features
-			}
-			});
-			console.log("dada2");
-			map.addLayer({
-				'id': "point",
-				'type': 'circle',
-				'source': 'point',
-				paint: {
-					'circle-radius': 4,
-					'circle-color': "#0000FF"
-				}
-			});
-			console.log("dada3");
-		//}
-	//});
-
-});
+	a = map.addLayer({
+		'id': "point",
+		'type': 'circle',
+		'source': 'point',
+		paint: {
+			'circle-radius': 4,
+			'circle-color': color
+		}
+	});	
+}
 
 
 map.on('click', function ({ lngLat }) {
@@ -211,14 +223,49 @@ map.on('click', function ({ lngLat }) {
 		drawEnd(coords_end);
 		getRoute();
 	}
+	coordsToPlace();
 });
+
+function coordsToPlace() {
+	const Http = new XMLHttpRequest();
+	var search_coords = [0, 0];
+	
+	if (input_foucus == 1) {
+		search_coords = coords_start[0] + ',' + coords_start[1];
+	}
+	else if (input_foucus == 2) {
+		search_coords = coords_end[0] + ',' + coords_end[1];
+	}
+	console.log("search_coords: " + search_coords);
+	const url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/' + search_coords + `.json?types=poi&access_token=${mapboxgl.accessToken}`;
+	Http.open("GET", url);
+	Http.send();
+	Http.onreadystatechange = function() {
+		if(this.readyState == 4 && this.status == 200) {
+			geoinfo = Http.responseText;
+			index = geoinfo.search("address");
+			address = Http.responseText.substring(index + 10);
+			index = address.search('category');
+			address = address.substring(0, index - 3);
+			console.log("Clicked Address: " + address);
+			
+			if (input_foucus == 1) {
+				document.getElementById("start-address").value = address;
+			}
+			else if (input_foucus == 2) {
+				document.getElementById("end-address").value = address;
+			}
+			
+		}
+	}
+}
 
 function placeToCoords() {
 	const Http = new XMLHttpRequest();
 	var search_location = document.getElementById("start-address").value;
 	search_location = search_location.replace(/ /g, "%20");
 	search_location = search_location.replace(/,/g, "%20");
-	console.log(search_location);
+	//console.log(search_location);
 	const url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/' + search_location + `.json?access_token=${mapboxgl.accessToken}`;
 	Http.open("GET", url);
 	Http.send();
@@ -243,7 +290,7 @@ function _placeToCoords() {
 	var search_location = document.getElementById("end-address").value;
 	search_location = search_location.replace(/ /g, "%20");
 	search_location = search_location.replace(/,/g, "%20");
-	console.log(search_location);
+	//console.log(search_location);
 	const url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/' + search_location + `.json?access_token=${mapboxgl.accessToken}`;
 	Http.open("GET", url);
 	Http.send();
@@ -477,7 +524,7 @@ function showDirection() {
 	coords_start = [parseFloat(coords_start[0]), parseFloat(coords_start[1])];
 	coords_end = getQueryVariable("end").split(",");
 	coords_end = [parseFloat(coords_end[0]), parseFloat(coords_end[1])];
-	console.log(coords_start, coords_end);
+	// console.log(coords_start, coords_end);
 	drawStart(coords_start);
 	drawEnd(coords_end);
 	getRoute(show=true);
@@ -485,15 +532,6 @@ function showDirection() {
 
 function retrieveData() {
 	$(document).ready(function() {
-		
-		var fountainData = JSON.parse(localStorage.getItem("fountainData"));
-
-		if (fountainData) {
-			console.log("Source: localStorage");
-			// localStorage.clear();
-			// iterateRecords(fountainData);
-		}
-		console.log("Source: ajax call");
 		var data = {
 			// Drinking Fountain Tap
 			resource_id: "69c588f4-232a-4e71-88ee-045f8afb6880",
@@ -507,13 +545,64 @@ function retrieveData() {
 			cache: true,
 			success: function(data) {
 				localStorage.setItem("fountainData", JSON.stringify(data));
-				console.log("Success!");
+				// console.log("Success!");
 				// iterateRecords(data);
 			}
 		});
 		
-		console.log(fountainData)
-		return fountainData;
+		var fountainData = JSON.parse(localStorage.getItem("fountainData"));
+		// console.log("fountainData =", fountainData);
+		
+		var data2 = {
+			// (free) Wireless hotspot locations — Libraries, Parks and Public spaces
+			// https://data.gov.au/dataset/ds-brisbane-17fb3724-ecfc-4802-8f16-62839fb73fc0/details?q=bench
+			resource_id: "9851b9fd-8a46-4268-9ece-4e45b143e8c9",
+			limit: 9999
+		}
+		
+
+		$.ajax({
+			url: "https://www.data.brisbane.qld.gov.au/data/api/3/action/datastore_search",
+			data: data2,
+			dataType: "jsonp", // We use "jsonp" to ensure AJAX works correctly locally (otherwise XSS).
+			cache: true,
+			success: function(data) {
+				// console.log("Before Success!");
+				localStorage.setItem("wifiData", JSON.stringify(data));
+				// console.log("Success!");
+				// iterateRecords(data);
+			}
+		});
+		
+		var parkData = JSON.parse(localStorage.getItem("parkData"));
+		// console.log("parkData=", parkData);
+		
+		var data3 = {
+			// Park — Locations
+			// https://data.gov.au/dataset/ds-brisbane-0335347d-d085-4c5a-a26a-3b92e8bb7a87/details?q=parks
+			resource_id: "2c8d124c-81c6-409d-bffb-5761d10299fe",
+			limit: 9999
+		}
+		
+
+		$.ajax({
+			url: "https://www.data.brisbane.qld.gov.au/data/api/3/action/datastore_search",
+			data: data3,
+			dataType: "jsonp", // We use "jsonp" to ensure AJAX works correctly locally (otherwise XSS).
+			cache: true,
+			success: function(data) {
+				// console.log("Before Success!");
+				localStorage.setItem("parkData", JSON.stringify(data));
+				// console.log("Success!");
+				// iterateRecords(data);
+			}
+		});
+		
+		var parkData = JSON.parse(localStorage.getItem("parkData"));
+		// console.log("parkData=", parkData);
+		
+		
+		return true;
 	});
 }
 
